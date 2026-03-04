@@ -43,7 +43,7 @@ Cada fila representa un cliente y la variable **`exited`** indica si el cliente 
 | geography        | País de residencia                             |
 | gender           | Género del cliente                             |
 | age              | Edad del cliente                               |
-| tenure           | Años que el cliente ha permanecido en el banco |
+| tenure           | Años del depósito a plazo fijo                 |
 | balance          | Saldo en la cuenta bancaria                    |
 | num_of_products  | Número de productos contratados                |
 | has_cr_card      | Indica si el cliente posee tarjeta de crédito  |
