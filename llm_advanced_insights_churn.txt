@@ -1,0 +1,213 @@
+# Análisis Profundo de Churn Bancario
+---
+
+## 1. Resumen Ejecutivo
+
+El análisis revela varias variables críticas explicando el abandono (churn) de clientes. Destacan especialmente: país de residencia, edad, género, número de productos contratados, balance, actividad del cliente y ciertas interacciones entre estas variables. Se identifican segmentos de alto riesgo y algunos patrones inesperados/anómalos directamente accionables para estrategias de retención.
+
+---
+
+## 2. Análisis Variable por Variable
+
+### a) **Geography**
+- **Germany**: 32.44% (mucho mayor que el promedio general de ~20%).
+- **France & Spain**: Ambas alrededor del 16% — están considerablemente por debajo de la media.
+
+**Patrón:** Los clientes de Alemania abandonan el banco el doble que españoles o franceses.
+- **Implica diferencia cultural o fallos operativos/locales importantes en Alemania.**
+
+---
+
+### b) **Gender**
+- **Female**: 25.07%  
+- **Male**: 16.46%
+
+**Patrón:** Las mujeres muestran un churn significativamente mayor.  
+- **Sugerencia:** Puede deberse a segmentación deficiente, productos menos atractivos o percepciones de la oferta; también relevante para intervenir con campañas de retención específicas por género.
+
+---
+
+### c) **has_cr_card**
+- **Sin tarjeta (0)**: 20.81%
+- **Con tarjeta (1)**: 20.18%
+
+**Patrón:** Prácticamente neutral; no discrimina el abandono.  
+- **Conclusión:** La tenencia per se de una tarjeta de crédito no es diferencial relevante.
+
+---
+
+### d) **is_active_member**
+- **Inactivo**: 26.85%
+- **Activo**: 14.27%
+
+**Patrón:** La inactividad duplica la probabilidad de churn.  
+- **Interpretación**: La falta de engagement es fuertísimo predictor de abandono.
+- **Accionable:** Refuerza acciones de activación/engagement.
+
+---
+
+### e) **num_of_products**
+- **4 productos:** 100%  
+- **3 productos:** 82.71%  
+- **1 producto:** 27.71%  
+- **2 productos:** 7.58%
+
+**Patrón:**  
+- **Segmento anómalo:** Todos los clientes con 4 productos abandonan siempre. Con 3 hay también una tasa altísima.
+- **Patrón fuerte:** 2 productos es el segmento con faro de fidelidad extrema.
+- **Riesgo:** Los de 1 producto tienen tasa superior a la media; hay una relación no-lineal, donde los extremos son los más riesgosos.
+
+**Interpretación sugerida:**  
+- Los clientes con 3-4 productos pueden estar “limpiando” sus productos, transferidos forzosamente o son cuentas experimentales/anómalas. Alternativamente, puede haber política obligatoria de cierre una vez alcanzado este número, o traspasos de cuentas. Segmento muy pequeño, pero urge investigación.
+
+---
+
+### f) **age**
+- **Hasta 30 años:** 7.52%  
+- **31-50 años:** 19.58%  
+- **51 años o más:** 44.65%
+
+**Patrón:** El riesgo de churn sube exponencialmente con la edad.
+- **Mayores de 50:** Segmento de mayor riesgo, casi la mitad abandona.
+- **Jóvenes:** Segmento más leal.
+
+**Accionable:** Retención proactiva de clientes mayores de 50 años, entender sus motivos (tal vez jubilación, cambio de necesidades, menor digitalización, etc.).
+
+---
+
+### g) **balance**
+- **Hasta 50 mil:** 14.25%
+- **50mil–100mil:** 19.88%
+- **100mil–250mil:** 25.22%
+
+**Patrón:** A mayor saldo, mayor abandono.
+- **Segmento inesperado:** Clientes “ricos” tienen más probabilidad de irse.
+- **Posible explicación:** Clientes de mayor poder adquisitivo esperan más del banco; con mayor saldo buscan mejores productos/rentabilidad; son más activos comparando opciones.
+
+---
+
+### h) **estimated_salary**
+- **0–50mil:** 19.93%
+- **50mil–100mil:** 19.87%
+- **100mil–200mil:** 20.84%
+
+**Patrón:** Prácticamente neutro, aunque leve alza en el tramo salarial alto.  
+- **Conclusión:** El salario no discrimina fuertemente el abandono, en contraste con el balance.
+
+---
+
+### i) **credit_score**
+- **Bajo (300-500):** 23.64%  
+- **Medio (500-650):** 21.08%  
+- **Alto (650-850):** 19.36%
+
+**Patrón:** A menor puntaje crediticio, más churn, pero la diferencia relativa no es tan espectacular como otras variables.
+- **Accionable:** Los clientes riesgosos abandonan ligeramente más.
+
+---
+
+### j) **tenure**
+- **0–2 años:** 21.37%  
+- **2–5 años:** 20.61 %  
+- **5–10 años:** 19.60%
+
+**Patrón:** Leve descenso con la antigüedad, pero no es muy marcado.  
+- **Conclusión:** La permanencia ayuda marginalmente para reducir el abandono.
+
+---
+
+## 3. Análisis de Segmentos y Patrones Combinados
+
+### a) **Edad + Geography**
+- En Alemania, con la tasa base ya altísima (32.4%), es probable que el segmento mayor de 50 años tenga tasas aún más alarmantes (potencialmente >50%).  
+- En España/Francia, el riesgo en mayores de 50 aún es mayor que la media, pero “aplanado” por la geografía; la interacción país-edad podría ser crítica.
+
+### b) **Género + Edad**
+- Las mujeres ya muestran una tasa significativamente mayor; si esto se suma a edad (>50 años) se conforma un grupo de alto riesgo (ej. mujeres mayores de 50 años).
+- **Accionable:** Identificar a estas clientas en Alemania y lanzar campañas inmediatas de retención.
+
+### c) **Balance + Edad**
+- Altos balances + Edad alta = segmento de clientes "premium" maduros que están abandonando. Estos son de particular valor económico y reputacional.
+
+### d) **Actividad + Productos**
+- Inactivos + 1 producto = clientes desconectados y desatendidos.  
+- Inactivos con varios productos (si existen) = gran alarma, están a punto de abandonar y el valor de pérdida será alto.
+
+### e) **Productos (Anomalía 3–4 Productos)**
+- El churn del 100% en 4 productos y 82.7% en 3 productos **no es esperado**, ni siquiera en cuentas experimentales. Esto indica una anomalía de negocio:
+    - ¿Son cuentas especiales? ¿Cierres por consolidación? ¿Un producto obsoleto forzando cierre masivo?
+    - Urge auditoría interna/análisis de estos casos.
+
+---
+
+## 4. Segmentos Críticos de Alto Riesgo
+
+- **Clientes Alemanes**: Altísimo riesgo intrínseco.
+- **Mayores de 50 años**: Riesgo extremo de abandono y potencial costo.
+- **Clientes con 3–4 productos**: Completamente insostenible; urge diagnóstico organizacional/proceso.
+- **Clientes inactivos**: Riesgo alto, especialmente si además tienen saldo alto/edad y otros factores.
+- **Mujeres alemanas mayores de 50**: Potentemente expuestos.
+
+---
+
+## 5. Segmentos Anómalos e Inesperados
+
+- **Clientes con 4 productos (100% churn) y 3 productos (82.7% churn):**
+    - Puede deberse a error de proceso, movimiento masivo de cartera, apuestas experimentales por producto o fallas de segmentación. Aunque sean pocos (probable por la media de productos 1.53), su análisis es crítico.
+- **Clientes con balance alto** (100k–250k) muestran más churn que los de saldo bajo: contraintuitivo, pues suelen ser considerados más fieles (clientes premium).
+
+---
+
+## 6. Potenciales Causas Operativas o de Negocio
+
+- Fuerte diferencial cultural/procesal en Alemania.
+- Productos de bajo engagement (clientes con 1 producto, inactivos).
+- Deficiencia de cross-selling de productos efectivos con 2 productos, que es protector.
+- Experiencia decepcionante para segmentos premium (saldo y edad alta).
+- Falta de acciones customizadas para mujeres, especialmente en grupos de riesgo.
+- Potencial mal diseño del portafolio de productos/servicios para clientes multi-producto o premium.
+- Posible concentración de esfuerzos en antigüedad (tenure), cuando no es tan relevante como se pensaba.
+
+---
+
+## 7. Recomendaciones Accionables
+
+1. **Diagnóstico Profundo Alemania**:  
+   - Revisión de experiencia, oferta, pricing, canales, e incidentes de servicio.
+   - Focalizar campañas de retención personalizadas, con especial énfasis en mujeres y mayores de 50 años.
+
+2. **Clientes con 3–4 Productos**:  
+   - Auditoría urgente del proceso: ¿por qué abandonan todos? ¿son cuentas de cierre obligatorio, o hay proceso administrativo erróneo?
+   - Implementar alertas automáticas para estos clientes.
+
+3. **Retención y engagement para Mayores de 50**:  
+   - Campañas proactivas para entender necesidades.
+   - Productos más adaptados a etapa de vida(finanza personal, asesoría, servicios senior).
+
+4. **Clientes “Premium” (saldo alto/edad alta)**:  
+   - Paquetes especiales de fidelización y servicio personalizado.
+   - Revisión de beneficios/precios para asegurar competitividad.
+
+5. **Estrategias de Reactivación**:  
+   - Acciones específicas para inactivos, especialmente si tienen saldo/productos relevantes.
+   - Contacto preventivo antes de la ventana de riesgo.
+
+6. **Segmentación por Género**:  
+   - Construir oferta, experiencia de usuario y comunicación más sensible y atractiva para mujeres, especialmente en los segmentos de alto riesgo identificados.
+
+7. **Revisar Estrategia de Cross-Selling**:  
+   - Fomentar la migración de 1 a 2 productos, que claramente protege contra el abandono.
+
+---
+
+## 8. Conclusión
+
+El abandono (churn) en esta base no es homogéneo; responde a factores culturales, demográficos, de comportamiento y de portafolio de productos. El mayor impacto vendrá al actuar sobre:
+- Países-problema (Alemania), 
+- segmentos demográficos de riesgo (mayores, mujeres),
+- inactivos,
+- y especialmente sobre segmentos que sorprendentemente deberían ser los más fieles (multi-producto, balanza alta) y no lo son.
+
+Un enfoque de retención segmentado, proactivo y sustentado en estos hallazgos permitirá maximizar el valor de la base e incrementar la lealtad de los clientes de alto valor.
+
+---

@@ -1,0 +1,91 @@
+Claro, con base en la información proporcionada sobre el dataset, a continuación te presento el análisis solicitado para identificar los factores que podrían influir en el churn, así como las hipótesis y tendencias relevantes:
+
+---
+
+### 1. **Posibles factores que influyen en el churn ('exited')**
+
+#### Variables que por su naturaleza son más propensas a estar relacionadas con churn:
+
+- **credit_score** (puntaje crediticio)
+- **geography** (país)
+- **gender** (género)
+- **age** (edad)
+- **tenure** (años de permanencia)
+- **balance** (saldo bancario)
+- **num_of_products** (número de productos contratados)
+- **has_cr_card** (posee tarjeta de crédito)
+- **is_active_member** (nivel de actividad)
+- **estimated_salary** (salario estimado)
+
+---
+
+### 2. **Explicación del posible vínculo entre esas variables y el abandono**
+
+- **credit_score**: Clientes con menor puntaje suelen considerarse más riesgosos y pueden ser menos atractivos para el banco o experimentar dificultades financieras, lo que puede aumentar el churn. También pueden recibir menos servicios o condiciones desfavorables.
+  
+- **geography**: El país puede influir debido a diferencias en cultura, servicios ofrecidos, competencia local y nivel económico, tornando a ciertos grupos más propensos a abandonar.
+  
+- **gender**: Potencialmente puede haber diferencias de comportamiento según el género, aunque normalmente su impacto suele ser marginal salvo haya particularidades locales.
+  
+- **age**: Personas jóvenes pueden ser menos leales o estar en situaciones de cambio frecuente (estudios, trabajo, mudanzas). Clientes de mayor edad pueden mostrar mayor estabilidad, aunque los mayores pueden estar menos interesados en servicios digitales.
+  
+- **tenure**: Los clientes con menos años en el banco suelen ser más proclives a abandonar, ya que no tienen tanta lealtad o aún están en fase de “prueba”.
+  
+- **balance**: Clientes con bajos saldos pueden tener menos vinculación o interés en mantener la cuenta; sin embargo, clientes con saldos altos también pueden irse si no reciben servicios personalizados.
+  
+- **num_of_products**: A mayor número de productos, más difícil y menos probable suele ser el abandono (efecto de “enganche”).
+  
+- **has_cr_card**: La tarjeta de crédito puede indicar mayor vinculación, pero si solo funciona como producto “comodín” puede que no aporte suficiente lealtad.
+  
+- **is_active_member**: Los clientes inactivos muestran mayor propensión al churn, pues ya no interactúan de forma regular.
+  
+- **estimated_salary**: El salario puede influir si hay trato diferencial o percepción de valor por parte del banco según segmentos de ingreso.
+
+---
+
+### 3. **Hipótesis basadas en patrones numéricos y categóricos**
+
+- **Edad**: Hipótesis: los clientes más jóvenes (<30 años) y mayores (>60 años) podrían representar tasas más altas de churn por motivos distintos (falta de vinculación o cambio de prioridades respectivamente).
+- **Tenure**: Clientes con poca antigüedad (<2 años) tienen mayor churn; la lealtad aumenta a medida que se prolonga la relación banca-cliente.
+- **Número de productos**: Hipótesis: quienes tienen solo 1 producto presentan mayor propensión a abandonar, mientras que clientes con 3 o 4 productos son más leales.
+- **Actividad**: Los clientes con is_active_member = 0 abandonan más, pues la inactividad suele preceder al cierre de cuentas.
+- **Geografía**: Algún país puede mostrar tasa de churn significativamente distinta (más alta/baja) comparado con los otros dos.
+- **Puntaje crediticio**: Clientes con credit_score bajo (<600) tienen churn mayor por dificultades o insatisfacción.
+- **Saldo**: Clientes con balance = 0 o muy bajo pueden estar cerca de abandonar o no utilizar productos del banco.
+
+---
+
+### 4. **Variables más relevantes de acuerdo a la descripción**
+
+Por su carácter y lo que sugieren las descripciones, las variables más relevantes para el modelo de churn, en orden probable de importancia, serían:
+
+- **is_active_member**
+- **num_of_products**
+- **tenure**
+- **age**
+- **credit_score**
+- **balance**
+- **geography**
+
+Variables como **has_cr_card**, **estimated_salary** y **gender** probablemente tengan menor impacto, aunque pueden aportar en combinación con otras.
+
+---
+
+### 5. **Tendencias notables en los datos**
+
+- **Edad media (38.92 años)** y rango extendido: posibilidad de estudiar curvas de churn según etapas de vida.
+- **Is_active_member (media = 0.52)**: Cerca de la mitad de clientes no son activos; allí podría estar el “pool” principal de churn.
+- **Num_of_products (media = 1.53, mín=1, máx=4)**: El valor bajo promedio sugiere que muchos clientes tienen poca vinculación, elevando el riesgo de churn.
+- **High balance mean (76,485.89) and max (250,898.09)**: Existe un segmento de clientes de alto valor para el banco que puede requerir estrategias de retención específicas.
+- **Exited (media=0.20)**: 20% de churn; es un valor relevante para poner foco en segmentación y estrategias preventivas.
+
+---
+
+### **Resumen visual de las hipótesis clave**
+
+- **Mayor churn**: Clientes jóvenes, baja antigüedad, baja actividad, pocos productos, bajo puntaje crediticio y posiblemente de ciertos países.
+- **Menor churn**: Clientes activos, con muchos productos, alta antigüedad, balances altos, puntaje crediticio elevado.
+
+---
+
+Si necesitas análisis más específico (por ejemplo, interacción entre variables, o propuestas concretas de modelos), házmelo saber.
