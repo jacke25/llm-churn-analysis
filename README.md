@@ -129,7 +129,6 @@ El análisis permitió identificar varios patrones relevantes:
 * Pandas
 * NumPy
 * Matplotlib
-* Seaborn
 * OpenAI API
 * Jupyter Notebook
 
